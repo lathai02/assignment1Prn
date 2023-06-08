@@ -1,0 +1,77 @@
+﻿using BusinessObject;
+using System.Collections.Generic;
+
+namespace DataAccess
+{
+    public class MemberDao
+    {
+        private static List<Member> MemberList = new List<Member>();
+
+        public MemberDao() { }
+
+        private static MemberDao memberDao = null;
+        private static readonly object memberDaoLock = new object();
+
+
+        public static MemberDao getMemberDao
+        {
+            get
+            {
+                lock (memberDaoLock)
+                {
+                    if (memberDao == null)
+                    {
+                        memberDao = new MemberDao();
+                    }
+                    return memberDao;
+
+                }
+            }
+        }
+
+        public List<Member> getAllMember => MemberList;
+
+        public  Member GetMemberByID(int id) {
+            return MemberList.SingleOrDefault(member => member.MemberID == id);
+        }
+
+        public void AddMember(Member memberAdd)
+        {
+            Member mem = GetMemberByID(memberAdd.MemberID);
+            if(mem == null)
+            {
+                MemberList.Add(memberAdd);
+            }
+            else
+            {
+                throw new Exception("Member has already exists");
+            }
+        }
+
+        public void UpdateMember(Member memberUpdate)
+        {
+            Member mem = GetMemberByID(memberUpdate.MemberID);
+            if (mem != null)
+            {
+                MemberList[MemberList.IndexOf(mem)] = memberUpdate;
+            }
+            else
+            {
+                throw new Exception("Member does not exist");
+            }
+        }
+
+        public void DeleteMember(Member memberDelete)
+        {
+            Member mem = GetMemberByID(memberDelete.MemberID);
+            if( mem != null)
+            {
+                MemberList.Remove(memberDelete);
+            }
+            else
+            {
+                throw new Exception("Member does not exist");
+            }
+        }
+    }
+}

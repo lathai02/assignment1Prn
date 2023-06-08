@@ -1,0 +1,12 @@
+D:\SUMMER2023\PRN211\Assignment1\Ass01Solution\BusinessObject\bin\Debug\net6.0\BusinessObject.deps.json
+D:\SUMMER2023\PRN211\Assignment1\Ass01Solution\BusinessObject\bin\Debug\net6.0\BusinessObject.dll
+D:\SUMMER2023\PRN211\Assignment1\Ass01Solution\BusinessObject\bin\Debug\net6.0\BusinessObject.pdb
+D:\SUMMER2023\PRN211\Assignment1\Ass01Solution\BusinessObject\obj\Debug\net6.0\BusinessObject.csproj.AssemblyReference.cache
+D:\SUMMER2023\PRN211\Assignment1\Ass01Solution\BusinessObject\obj\Debug\net6.0\BusinessObject.GeneratedMSBuildEditorConfig.editorconfig
+D:\SUMMER2023\PRN211\Assignment1\Ass01Solution\BusinessObject\obj\Debug\net6.0\BusinessObject.AssemblyInfoInputs.cache
+D:\SUMMER2023\PRN211\Assignment1\Ass01Solution\BusinessObject\obj\Debug\net6.0\BusinessObject.AssemblyInfo.cs
+D:\SUMMER2023\PRN211\Assignment1\Ass01Solution\BusinessObject\obj\Debug\net6.0\BusinessObject.csproj.CoreCompileInputs.cache
+D:\SUMMER2023\PRN211\Assignment1\Ass01Solution\BusinessObject\obj\Debug\net6.0\BusinessObject.dll
+D:\SUMMER2023\PRN211\Assignment1\Ass01Solution\BusinessObject\obj\Debug\net6.0\refint\BusinessObject.dll
+D:\SUMMER2023\PRN211\Assignment1\Ass01Solution\BusinessObject\obj\Debug\net6.0\BusinessObject.pdb
+D:\SUMMER2023\PRN211\Assignment1\Ass01Solution\BusinessObject\obj\Debug\net6.0\ref\BusinessObject.dll
