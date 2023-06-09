@@ -1,6 +1,6 @@
 ﻿namespace MyStoreWinApp
 {
-    partial class Form1
+    partial class frmLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -62,6 +62,7 @@
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(206, 27);
             txtPassword.TabIndex = 28;
+            txtPassword.UseSystemPasswordChar = true;
             // 
             // txtEmail
             // 
@@ -88,7 +89,7 @@
             lbEmail.TabIndex = 25;
             lbEmail.Text = "Email";
             // 
-            // Form1
+            // frmLogin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -99,8 +100,9 @@
             Controls.Add(txtEmail);
             Controls.Add(lbPassword);
             Controls.Add(lbEmail);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "frmLogin";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Login Form";
             ResumeLayout(false);
             PerformLayout();
         }

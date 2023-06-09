@@ -1,11 +1,23 @@
 ﻿using BusinessObject;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 
 namespace DataAccess
 {
     public class MemberDao
     {
-        private static List<Member> MemberList = new List<Member>();
+        private static List<Member> MemberList = new List<Member>()
+        {
+            new Member
+            {
+                MemberID = 1,
+                MemberName = "le an thai",
+                Email = "leanthai02@gmail.com",
+                Password = "Lat1611@",
+                City = "Ha Noi",
+                Country = "Nghe An",
+            }
+        };
 
         public MemberDao() { }
 
@@ -31,14 +43,15 @@ namespace DataAccess
 
         public List<Member> getAllMember => MemberList;
 
-        public  Member GetMemberByID(int id) {
+        public Member GetMemberByID(int id)
+        {
             return MemberList.SingleOrDefault(member => member.MemberID == id);
         }
 
         public void AddMember(Member memberAdd)
         {
             Member mem = GetMemberByID(memberAdd.MemberID);
-            if(mem == null)
+            if (mem == null)
             {
                 MemberList.Add(memberAdd);
             }
@@ -64,13 +77,26 @@ namespace DataAccess
         public void DeleteMember(Member memberDelete)
         {
             Member mem = GetMemberByID(memberDelete.MemberID);
-            if( mem != null)
+            if (mem != null)
             {
                 MemberList.Remove(memberDelete);
             }
             else
             {
                 throw new Exception("Member does not exist");
+            }
+        }
+
+        internal bool getMemberByEmailAndPassword(Member memberFind)
+        {
+            var mem = MemberList.SingleOrDefault(member => (member.Email == memberFind.Email && member.Password == memberFind.Password));
+            if (mem != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
