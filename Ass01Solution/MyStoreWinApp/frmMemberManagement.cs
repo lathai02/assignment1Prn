@@ -22,10 +22,13 @@ namespace MyStoreWinApp
         public bool isAdmin;
         BindingSource source;
         IMemberRepository memberRepository = new MemberRepository();
+        public Member Member = new Member();
+
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            LoadListCar();
+
+            LoadListMember(getAll());
         }
 
         private void ClearText()
@@ -38,13 +41,19 @@ namespace MyStoreWinApp
             txtMemberCountry.Text = string.Empty;
         }
 
-        private void LoadListCar()
+        private List<Member> getAll()
         {
-            var memberList = memberRepository.getListMember();
+            List<Member> memberList = new List<Member>();
+            memberList = (List<Member>)memberRepository.getListMember();
+            return memberList;
+        }
+
+        private void LoadListMember(List<Member> listMember)
+        {
             try
             {
                 source = new BindingSource();
-                source.DataSource = memberList;
+                source.DataSource = listMember;
 
                 txtMemberID.DataBindings.Clear();
                 txtMemberName.DataBindings.Clear();
@@ -61,9 +70,11 @@ namespace MyStoreWinApp
                 txtMemberCountry.DataBindings.Add("Text", source, "Country");
 
                 dgvMemberList.DataSource = null;
+                cbCity.DataSource = memberRepository.getListCities();
+                cbCountry.DataSource = memberRepository.getListCountry();
                 dgvMemberList.DataSource = source;
 
-                if (memberList.Count() == 0)
+                if (listMember.Count() == 0)
                 {
                     btnDelete.Enabled = false;
                     ClearText();
@@ -85,7 +96,7 @@ namespace MyStoreWinApp
             {
                 Member member = getMember();
                 memberRepository.deleteMember(member);
-                LoadListCar();
+                LoadListMember(getAll());
             }
             catch (Exception ex)
             {
@@ -117,12 +128,101 @@ namespace MyStoreWinApp
 
         private void frmMemberManagement_Load(object sender, EventArgs e)
         {
-            btnDelete.Enabled = false;
+            if (!isAdmin)
+            {
+                btnDelete.Visible = false;
+                btnNew.Visible = false;
+                btnSearch.Visible = false;
+                cbCity.Visible = false;
+                cbCountry.Visible = false;
+                btnFind.Visible = false;
+                txtSearch.Visible = false;
+                btnSearch.Visible = false;
+                btnLoad.Visible = false;
+                cbSortMember.Visible = false;
+                lbFilterCity.Visible = false;
+                lbFilterCountry.Visible = false;
+                lbSortMember.Visible = false;
 
+                List<Member> members = new List<Member>();
+                members.Add(Member);
+                LoadListMember(members);
+            }
+            else
+            {
+                cbCity.DataSource = memberRepository.getListCities();
+                cbCountry.DataSource = memberRepository.getListCountry();
+            }
+            btnDelete.Enabled = false;
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
+            frmMemberDetail frmMemberDetail = new frmMemberDetail
+            {
+                Text = "Add Car",
+                isUpdate = false,
+                MemberRepository = memberRepository,
+
+            };
+            if (frmMemberDetail.ShowDialog() == DialogResult.OK)
+            {
+                LoadListMember(getAll());
+                source.Position = source.Count - 1;
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void dgvMemberList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            frmMemberDetail frmMemberDetail = new frmMemberDetail
+            {
+                Text = "Update Car",
+                isUpdate = true,
+                MemberRepository = memberRepository,
+                MemberInfo = getMember()
+            };
+            if (frmMemberDetail.ShowDialog() == DialogResult.OK)
+            {
+                LoadListMember(getAll());
+                source.Position = source.Count - 1;
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadListMember((List<Member>)memberRepository.getListMemberByKeyWord(txtSearch.Text));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Delete car");
+            }
+        }
+
+        private void cbSortMember_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbSortMember.Text == "Assending")
+            {
+                LoadListMember((List<Member>)memberRepository.getListMemberAscending());
+            }
+            else
+            {
+                LoadListMember((List<Member>)memberRepository.getListMemberDescending());
+            }
+        }
+
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            var city = cbCity.Text;
+            var country = cbCountry.Text;
+            
+            LoadListMember((List<Member>)memberRepository.getListFilterCityAndCountry(country,city));
 
         }
     }

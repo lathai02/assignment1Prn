@@ -45,15 +45,15 @@
             btnDelete = new Button();
             btnSearch = new Button();
             txtSearch = new TextBox();
-            txtFilterByCity = new TextBox();
-            txtFilterByCountry = new TextBox();
             btnFind = new Button();
             lbFilterCity = new Label();
             lbFilterCountry = new Label();
             cbSortMember = new ComboBox();
-            label1 = new Label();
+            lbSortMember = new Label();
             btnLoad = new Button();
             btnClose = new Button();
+            cbCity = new ComboBox();
+            cbCountry = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvMemberList).BeginInit();
             SuspendLayout();
             // 
@@ -162,6 +162,7 @@
             dgvMemberList.RowTemplate.Height = 29;
             dgvMemberList.Size = new Size(970, 169);
             dgvMemberList.TabIndex = 12;
+            dgvMemberList.CellDoubleClick += dgvMemberList_CellDoubleClick;
             // 
             // btnNew
             // 
@@ -191,6 +192,7 @@
             btnSearch.TabIndex = 15;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearch
             // 
@@ -198,20 +200,6 @@
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(216, 27);
             txtSearch.TabIndex = 16;
-            // 
-            // txtFilterByCity
-            // 
-            txtFilterByCity.Location = new Point(659, 72);
-            txtFilterByCity.Name = "txtFilterByCity";
-            txtFilterByCity.Size = new Size(218, 27);
-            txtFilterByCity.TabIndex = 17;
-            // 
-            // txtFilterByCountry
-            // 
-            txtFilterByCountry.Location = new Point(659, 119);
-            txtFilterByCountry.Name = "txtFilterByCountry";
-            txtFilterByCountry.Size = new Size(216, 27);
-            txtFilterByCountry.TabIndex = 18;
             // 
             // btnFind
             // 
@@ -221,6 +209,7 @@
             btnFind.TabIndex = 19;
             btnFind.Text = "Find";
             btnFind.UseVisualStyleBackColor = true;
+            btnFind.Click += btnFind_Click;
             // 
             // lbFilterCity
             // 
@@ -248,15 +237,16 @@
             cbSortMember.Name = "cbSortMember";
             cbSortMember.Size = new Size(216, 28);
             cbSortMember.TabIndex = 23;
+            cbSortMember.SelectedIndexChanged += cbSortMember_SelectedIndexChanged;
             // 
-            // label1
+            // lbSortMember
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(557, 167);
-            label1.Name = "label1";
-            label1.Size = new Size(96, 20);
-            label1.TabIndex = 24;
-            label1.Text = "Sort member";
+            lbSortMember.AutoSize = true;
+            lbSortMember.Location = new Point(557, 167);
+            lbSortMember.Name = "lbSortMember";
+            lbSortMember.Size = new Size(96, 20);
+            lbSortMember.TabIndex = 24;
+            lbSortMember.Text = "Sort member";
             // 
             // btnLoad
             // 
@@ -276,21 +266,38 @@
             btnClose.TabIndex = 26;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
+            // 
+            // cbCity
+            // 
+            cbCity.FormattingEnabled = true;
+            cbCity.Location = new Point(659, 71);
+            cbCity.Name = "cbCity";
+            cbCity.Size = new Size(216, 28);
+            cbCity.TabIndex = 27;
+            // 
+            // cbCountry
+            // 
+            cbCountry.FormattingEnabled = true;
+            cbCountry.Location = new Point(659, 114);
+            cbCountry.Name = "cbCountry";
+            cbCountry.Size = new Size(216, 28);
+            cbCountry.TabIndex = 28;
             // 
             // frmMemberManagement
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(994, 506);
+            Controls.Add(cbCountry);
+            Controls.Add(cbCity);
             Controls.Add(btnClose);
             Controls.Add(btnLoad);
-            Controls.Add(label1);
+            Controls.Add(lbSortMember);
             Controls.Add(cbSortMember);
             Controls.Add(lbFilterCountry);
             Controls.Add(lbFilterCity);
             Controls.Add(btnFind);
-            Controls.Add(txtFilterByCountry);
-            Controls.Add(txtFilterByCity);
             Controls.Add(txtSearch);
             Controls.Add(btnSearch);
             Controls.Add(btnDelete);
@@ -335,14 +342,14 @@
         private Button btnDelete;
         private Button btnSearch;
         private TextBox txtSearch;
-        private TextBox txtFilterByCity;
-        private TextBox txtFilterByCountry;
         private Button btnFind;
         private Label lbFilterCity;
         private Label lbFilterCountry;
         private ComboBox cbSortMember;
-        private Label label1;
+        private Label lbSortMember;
         private Button btnLoad;
         private Button btnClose;
+        private ComboBox cbCity;
+        private ComboBox cbCountry;
     }
 }

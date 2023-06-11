@@ -15,5 +15,12 @@ namespace DataAccess.Repository
         public void getMemberByID(Member member) => MemberDao.getMemberDao.GetMemberByID(member.MemberID);
         public void updateMember(Member member) => MemberDao.getMemberDao.UpdateMember(member);
         public bool getMemberByEmailAndPassword(Member member) => MemberDao.getMemberDao.getMemberByEmailAndPassword(member);
+        public IEnumerable<Member> getListMemberByKeyWord(string keyword) => MemberDao.getMemberDao.checkKeyWord(keyword);
+        public IEnumerable<Member> getListMemberAscending() => MemberDao.getMemberDao.getListMemberAscending();
+        public IEnumerable<Member> getListMemberDescending() => MemberDao.getMemberDao.getListMemberDescending();
+        public Member getMemberInfoByEmailAndPassword(Member member) => MemberDao.getMemberDao.getMemberInfoByEmailAndPassword(member);
+        public List<string> getListCities() => MemberDao.getMemberDao.getListCity();
+        public List<string> getListCountry() => MemberDao.getMemberDao.getListCountry();
+        public IEnumerable<Member> getListFilterCityAndCountry(string country, string city) => MemberDao.getMemberDao.getListFilterCityAndCountry(country, city);
     }
 }

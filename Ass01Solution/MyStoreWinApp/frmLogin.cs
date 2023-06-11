@@ -37,6 +37,7 @@ namespace MyStoreWinApp
                 frmMemberManagement frmMemberManagement = new frmMemberManagement();
                 frmMemberManagement.isAdmin = true;
                 frmMemberManagement.ShowDialog();
+                this.Close();
             }
             else if (MemberRepository.getMemberByEmailAndPassword(member))
             {
@@ -44,7 +45,9 @@ namespace MyStoreWinApp
                 this.Hide();
                 frmMemberManagement frmMemberManagement = new frmMemberManagement();
                 frmMemberManagement.isAdmin = false;
+                frmMemberManagement.Member = MemberRepository.getMemberInfoByEmailAndPassword(member);
                 frmMemberManagement.ShowDialog();
+                this.Close();
             }
             else
             {
